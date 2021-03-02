@@ -6,10 +6,20 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ .Title }} --- 我的技术博客</title>
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <p>ID: {{ .ID }}</p>
     <p>标配: {{ .Title }}</p>
     <p>内容: {{ .Body }}</p>
+    {{/*    */}}
+    {{ $idString := Int64ToString .ID }}
+    <form action="{{ RouteName2URL "articles.delete" "id" $idString}}" method="post">
+        <button type="submit" onclick="return confirm('删除动作不可逆, 请确定是否继续')">删除</button>
+    </form>
 </body>
 </html>
