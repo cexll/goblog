@@ -12,6 +12,7 @@ import (
 	"time"
 	"unicode/utf8"
 
+	"goblog/pkg/route"
 	"github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 )
@@ -174,7 +175,7 @@ func articlesShowHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		// 4. 读取成功
 		tmpl, err := template.New("show.gohtml").Funcs(template.FuncMap{
-			"RouteName2URL": RouteName2URL,
+			"RouteName2URL": route.Name2URL,
 			"Int64ToString": Int64ToString,
 		}).ParseFiles("resources/views/articles/show.gohtml")
 		checkError(err)
@@ -480,6 +481,8 @@ func removeTrailingSlash(next http.Handler) http.Handler {
 func main() {
 	initDB()
 	createTables()
+	route.Initialize()
+	router = route.Router
 	router.HandleFunc("/", homeHandler).Methods("GET").Name("home")
 	router.HandleFunc("/about", aboutHandler).Methods("GET").Name("about")
 
