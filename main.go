@@ -11,6 +11,7 @@ import (
 	"time"
 	"unicode/utf8"
 
+	"goblog/pkg/types"
 	"goblog/pkg/route"
 	"goblog/pkg/logger"
 	"github.com/go-sql-driver/mysql"
@@ -102,9 +103,7 @@ func RouteName2URL(routeName string, pairs ...string) string {
 	return url.String()
 }
 
-func Int64ToString(num int64) string {
-	return strconv.FormatInt(num, 10)
-}
+
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	//w.Header().Set("Content-Type", "text/html; charset=utf-8")
@@ -168,7 +167,7 @@ func articlesShowHandler(w http.ResponseWriter, r *http.Request) {
 		// 4. 读取成功
 		tmpl, err := template.New("show.gohtml").Funcs(template.FuncMap{
 			"RouteName2URL": route.Name2URL,
-			"Int64ToString": Int64ToString,
+			"Int64ToString": types.Int64ToString,
 		}).ParseFiles("resources/views/articles/show.gohtml")
 		logger.LogError(err)
 		tmpl.Execute(w, article)
