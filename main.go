@@ -123,8 +123,9 @@ func articlesCreateHandler(w http.ResponseWriter, r *http.Request) {
 
 func articlesShowHandler(w http.ResponseWriter, r *http.Request) {
 
-	// 1.获取URL参数
+	// 1. 获取 URL 参数
 	id := getRouteVariable("id", r)
+
 	// 2. 读取对应的文章数据
 	article, err := getArticleByID(id)
 
@@ -252,7 +253,6 @@ func articlesEditHandler(w http.ResponseWriter, r *http.Request) {
 	id := getRouteVariable("id", r)
 	// 2. 读取对应的文章数据
 	article, err := getArticleByID(id)
-
 	query := "SELECT * FROM articles WHERE id = ?"
 	err = db.QueryRow(query, id).Scan(&article.ID, &article.Title,
 		&article.Body)
@@ -286,8 +286,9 @@ func articlesEditHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func articlesUpdateHandler(w http.ResponseWriter, r *http.Request) {
-	// 1. 获取 url 参数
+	// 1. 获取 URL 参数
 	id := getRouteVariable("id", r)
+
 	// 2. 读取对应的文章数据
 	_, err := getArticleByID(id)
 
@@ -307,23 +308,9 @@ func articlesUpdateHandler(w http.ResponseWriter, r *http.Request) {
 		// 4. 未出现错误
 
 		// 4.1 表单验证
-		title := r.PostFormValue("value")
+		title := r.PostFormValue("title")
 		body := r.PostFormValue("body")
 		errors := validateArticleFormData(title, body)
-
-		// // 验证标题
-		// if title == "" {
-		// 	errors["title"] = "标题不能为空"
-		// } else if utf8.RuneCountInString(title) < 3 || utf8.RuneCountInString(title) > 40 {
-		// 	errors["title"] = "标题长度需介于 3-40"
-		// }
-
-		// // 验证内容
-		// if body == "" {
-		// 	errors["body"] = "内容不能为空"
-		// } else if utf8.RuneCountInString(body) < 10 {
-		// 	errors["body"] = "内容长度需大于或等于10个字节"
-		// }
 
 		if len(errors) == 0 {
 			// 4.2 表单验证通过, 更新数据
@@ -448,6 +435,7 @@ func main() {
 	router.HandleFunc("/articles/{id:[0-9]+}",
 		articlesUpdateHandler).Methods("POST").Name("articles.update")
 	router.HandleFunc("/articles/{id:[0-9]+}/edit", articlesEditHandler).Methods("GET").Name("articles.edit")
+	router.HandleFunc("/articles/{id:[0-9]+}", articlesUpdateHandler).Methods("POST").Name("articles.update")
 
 	// 自定义 404 页面
 	router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
@@ -461,5 +449,5 @@ func main() {
 	articleURL, _ := router.Get("articles.show").URL("id", "23")
 	fmt.Println("articleURL: ", articleURL)
 
-	http.ListenAndServe(":3000", removeTrailingSlash(router))
+	http.ListenAndServe(":8000", removeTrailingSlash(router))
 }

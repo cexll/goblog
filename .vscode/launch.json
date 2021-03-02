@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Golang",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "remotePath": "",
+            "port": 5546,
+            "host": "127.0.0.1",
+            "program": "${fileDirname}",
+            // "env": {
+            //     "GOPATH": "D:/GoPath",
+            //     "GOROOT": "D:/WindowsSoftware/Golang"
+            // },
+            "args": []
+        }
+    ]
+}
