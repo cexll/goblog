@@ -16,6 +16,12 @@ import (
 type ArticlesController struct {
 }
 
+type ArticlesFormData struct {
+	Title, Body string
+	URL         string
+	Errors      map[string]string
+}
+
 
 func (*ArticlesController) Show(w http.ResponseWriter, r *http.Request) {
 
@@ -67,3 +73,21 @@ func (*ArticlesController) Index(w http.ResponseWriter, r *http.Request) {
 		tmpl.Execute(w, articles)
 	}
 }
+
+func (*ArticlesController) Create(w http.ResponseWriter, r *http.Request) {
+
+	storeURL := route.Name2URL("articles.store")
+	data := ArticlesFormData{
+		Title:  "",
+		Body:   "",
+		URL:    storeURL,
+		Errors: nil,
+	}
+	tmpl, err := template.ParseFiles("resources/views/articles/create.gohtml")
+	if err != nil {
+		panic(err)
+	}
+
+	tmpl.Execute(w, data)
+}
+

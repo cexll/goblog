@@ -55,38 +55,8 @@ func getArticleByID(id string) (Article, error) {
 	return article, err
 }
 
-func RouteName2URL(routeName string, pairs ...string) string {
-	url, err := router.Get(routeName).URL(pairs...)
-	if err != nil {
-		logger.LogError(err)
-		return ""
-	}
-	return url.String()
-}
 
 
-
-
-
-
-
-
-
-func articlesCreateHandler(w http.ResponseWriter, r *http.Request) {
-	storeURL, _ := router.Get("articles.store").URL()
-	data := ArticlesFormData{
-		Title:  "",
-		Body:   "",
-		URL:    storeURL,
-		Errors: nil,
-	}
-	tmpl, err := template.ParseFiles("resources/views/articles/create.gohtml")
-	if err != nil {
-		panic(err)
-	}
-
-	tmpl.Execute(w, data)
-}
 
 
 
@@ -364,10 +334,7 @@ func main() {
 	router = bootstrap.SetupRoute()
 
 
-	router.HandleFunc("/articles",
-		articlesStoreHandler).Methods("POST").Name("articles.store")
-	router.HandleFunc("/articles/create",
-		articlesCreateHandler).Methods("GET").Name("articles.create")
+
 	router.HandleFunc("/articles/{id:[0-9]+}",
 		articlesUpdateHandler).Methods("POST").Name("articles.update")
 	router.HandleFunc("/articles/{id:[0-9]+}/edit", articlesEditHandler).Methods("GET").Name("articles.edit")
