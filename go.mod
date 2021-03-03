@@ -3,6 +3,7 @@ module goblog
 go 1.15
 
 require (
+	github.com/cosmtrek/air v1.15.1 // indirect
 	github.com/cweill/gotests v1.6.0 // indirect
 	github.com/fatih/gomodifytags v1.13.0 // indirect
 	github.com/go-delve/delve v1.6.0 // indirect
@@ -15,6 +16,7 @@ require (
 	github.com/stretchr/testify v1.7.0
 	github.com/uudashr/gopkgs/v2 v2.1.2 // indirect
 	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5 // indirect
+	golang.org/x/sys v0.0.0-20210301091718-77cc2087c03b // indirect
 	golang.org/x/tools/gopls v0.6.6 // indirect
 	gorm.io/driver/mysql v1.0.4
 	gorm.io/gorm v1.20.12
