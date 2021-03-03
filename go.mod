@@ -14,6 +14,7 @@ require (
 	github.com/ramya-rao-a/go-outline v0.0.0-20200117021646-2a048b4510eb // indirect
 	github.com/skratchdot/open-golang v0.0.0-20200116055534-eef842397966 // indirect
 	github.com/stretchr/testify v1.7.0
+	github.com/thedevsaddam/govalidator v1.9.10
 	github.com/uudashr/gopkgs/v2 v2.1.2 // indirect
 	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5 // indirect
 	golang.org/x/sys v0.0.0-20210301091718-77cc2087c03b // indirect
