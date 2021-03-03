@@ -1,14 +1,16 @@
 package article
 
 import (
-	"strconv"
+	"goblog/app/models"
 	"goblog/pkg/route"
+	"strconv"
 )
 
 type Article struct {
-	ID 		int64
-	Title 	string
-	Body 	string
+	models.BaseModel
+	// ID    int64
+	Title string
+	Body  string
 }
 
 func (a Article) Link() string {

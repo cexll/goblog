@@ -1,8 +1,8 @@
 package types
 
 import (
-	"strconv"
 	"goblog/pkg/logger"
+	"strconv"
 )
 
 func Int64ToString(num int64) string {
@@ -15,4 +15,8 @@ func StringToInt(str string) int {
 		logger.LogError(err)
 	}
 	return i
+}
+
+func Uint64ToString(num uint64) string {
+	return strconv.FormatUint(num, 10)
 }
