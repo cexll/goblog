@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"goblog/app/models/user"
 	"goblog/app/requests"
+	"goblog/pkg/session"
 	"goblog/pkg/view"
 	"net/http"
 )
@@ -38,11 +39,19 @@ func (*AuthController) DoRegister(w http.ResponseWriter, r *http.Request) {
 		if _user.ID > 0 {
 			view.RenderSimple(w, view.D{
 				"Errors": errs,
-				"User": _user,
+				"User":   _user,
 			}, "auth.register")
 		} else {
 			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprint(w, "注册失败，请联系管理员")
 		}
 	}
+}
+
+func (*AuthController) Login(w http.ResponseWriter, r *http.Request) {
+	view.RenderSimple(w, view.D{}, "auth.login")
+}
+
+func (*AuthController) DoLogin(w http.ResponseWriter, r *http.Request) {
+	//
 }

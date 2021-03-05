@@ -9,6 +9,7 @@ require (
 	github.com/go-delve/delve v1.6.0 // indirect
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/sessions v1.2.1 // indirect
 	github.com/haya14busa/goplay v1.0.0 // indirect
 	github.com/josharian/impl v1.0.0 // indirect
 	github.com/lestrrat-go/strftime v1.0.4 // indirect
